@@ -17,6 +17,11 @@ Repository Number: T13
 - No global stylings (in globals.css) are applied for all pages.
 - Passord is not encrypted before entering into database; Registration Page.
 
+### Version 1 (v1)
+
+- Password is encrypted for both Login and Register pages
+- No global stylings (in globals.css) are applied for all pages.
+
 ## How to Run:
 
 - Open folder for any version
