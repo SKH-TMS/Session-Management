@@ -14,7 +14,8 @@ Repository Number: T13
 
 ### Version 0 (v0)
 
-- Simple global stylings (in globals.css) are applied for all pages.
+- No global stylings (in globals.css) are applied for all pages.
+- Passord is not encrypted before entering into database; Registration Page.
 
 ## How to Run:
 
