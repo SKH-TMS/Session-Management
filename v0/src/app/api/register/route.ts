@@ -1,46 +1,31 @@
 import { NextResponse } from "next/server";
 import { MongoClient } from "mongodb";
-import { generateToken, setToken } from "../../../utils/token";
-
-const uri = process.env.MONGODB_URI || "mongodb://localhost:27017";
-const client = new MongoClient(uri);
+console.log("inside a route file");
+// Fetching the MongoDB URI from environment variables
+const uri = process.env.MONGODB_URI;
 
 export async function POST(req: Request) {
-  try {
-    const { email, password } = await req.json();
+  const client = new MongoClient(uri as string);
 
-    // Connect to MongoDB
+  try {
+    // Parse the request body
+    const body = await req.json();
+
+    // Connect to the MongoDB database
     await client.connect();
     const db = client.db("team_manager_db");
     const collection = db.collection("register_user");
 
-    // Check if user already exists
-    const existingUser = await collection.findOne({ email });
-    if (existingUser) {
-      return NextResponse.json({
-        success: false,
-        message: "User already exists",
-      });
-    }
+    // Insert the form data into MongoDB
+    const result = await collection.insertOne(body);
 
-    // Insert new user into database
-    const result = await collection.insertOne({ email, password });
-
-    // Generate JWT token
-    const token = generateToken({ email });
-
-    // Set the token as an HttpOnly cookie
-    const res = NextResponse.json({
-      success: true,
-      message: "Registration successful",
-    });
-    setToken(res, token);
-
-    return res;
+    // Return a success response
+    return NextResponse.json({ success: true, data: result });
   } catch (error) {
     console.error("Registration error:", error);
     return NextResponse.json({ success: false, message: "Failed to register" });
   } finally {
+    // Close the MongoDB connection
     await client.close();
   }
 }
