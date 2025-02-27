@@ -14,13 +14,28 @@ Repository Number: T13
 
 ### Version 0 (v0)
 
-- No global stylings (in globals.css) are applied for all pages.
 - Passord is not encrypted before entering into database; Registration Page.
 
 ### Version 1 (v1)
 
 - Password is encrypted for both Login and Register pages
-- No global stylings (in globals.css) are applied for all pages.
+
+### Version 2 (v2)
+
+- Best than v1
+- Logout link exists in both Profile-page and Navbar
+
+### Version 3 (v3)
+
+- **Problem in v2:** database connection and collection's name are required in each file.
+- Models are used in this version, to remove v2-prolem.
+
+### Version 4 (v4)
+
+- **Problem in v3:** Token doesn't contain **userType**. But it should contain for future usage. This will be necessary in case of multiple users.
+- The above probles is solve in this version, by using **userType** in the token. This will be used in
+  `Login/page.ts`
+  `Navbar/page.ts`
 
 ## How to Run:
 
